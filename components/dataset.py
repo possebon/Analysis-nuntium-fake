@@ -8,7 +8,7 @@ def load_data_as_dataframe() -> list:
     """Loads data from Dataset as Dataframe
 
     Returns:
-        list: List with 4 Dataframes
+        list: List with 4 Dataframes (true, fake, true_meta, fake_meta)
     """    
     
     # Initialize Dataframes

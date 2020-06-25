@@ -125,7 +125,7 @@ def display_wordcloud_words():
     df_true = remove_common_stop_words(df_true)
     df_fake = remove_common_stop_words(df_fake)
     
-    wordcloud_image = "./assets/wordcloud_true_words2.png"
+    wordcloud_image = "./assets/wordcloud_true_words5.png"
     wordcloud_true = WordCloud(width=800, height=600,background_color="white", colormap="Blues")
     words = {}
     for i, row in df_true.iterrows():
@@ -133,7 +133,7 @@ def display_wordcloud_words():
     wordcloud_true = wordcloud_true.generate_from_frequencies(words)
     wordcloud_true.to_file(wordcloud_image)
     
-    wordcloud_image = "./assets/wordcloud_fake_words2.png"
+    wordcloud_image = "./assets/wordcloud_fake_words5.png"
     wordcloud_fake = WordCloud(width=800, height=600,background_color="white", colormap="Reds")
     words = {}
     for i, row in df_fake.iterrows():
@@ -147,7 +147,7 @@ def display_wordcloud_bigrams():
     df_true = remove_common_stop_words(df_true)
     df_fake = remove_common_stop_words(df_fake)
     
-    wordcloud_image = "./assets/wordcloud_true_bigrams.png"
+    wordcloud_image = "./assets/wordcloud_true_bigrams5.png"
     wordcloud_true = WordCloud(width=800, height=600,background_color="white", colormap="Blues")
     words = {}
     for i, row in df_true.iterrows():
@@ -155,7 +155,7 @@ def display_wordcloud_bigrams():
     wordcloud_true = wordcloud_true.generate_from_frequencies(words)
     wordcloud_true.to_file(wordcloud_image)
     
-    wordcloud_image = "./assets/wordcloud_fake_bigrams.png"
+    wordcloud_image = "./assets/wordcloud_fake_bigrams5.png"
     wordcloud_fake = WordCloud(width=800, height=600,background_color="white", colormap="Reds")
     words = {}
     for i, row in df_fake.iterrows():

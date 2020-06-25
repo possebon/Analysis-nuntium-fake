@@ -213,8 +213,8 @@ fig_common_bigrams = common_words.display_chart_bigrams(df_true, df_fake)
 #df_true, df_fake = common_words.get_dataframes()
 
 # Wordcloud
-#common_words.display_wordcloud_words()
-#common_words.display_wordcloud_bigrams()
+common_words.display_wordcloud_words()
+common_words.display_wordcloud_bigrams()
 
 page2 = html.Div([
     dcc.Tabs([
@@ -238,13 +238,13 @@ page2 = html.Div([
         dcc.Tab(html.Div([
                 html.Div([
                     html.H3('True Words', style={"text-align" : "center"}),
-                    html.Img(src="./assets/wordcloud_true_words2.png", \
+                    html.Img(src="./assets/wordcloud_true_words5.png", \
                         style={"display" : "block", "margin": "auto", \
                             "max-width": "100%", "max-height" : "100%"})
                 ], style={"width": "40%", "padding-right": "5vh"}),
                 html.Div([
                     html.H3('Fake Words', style={"text-align" : "center"}),
-                    html.Img(src="./assets/wordcloud_fake_words2.png", \
+                    html.Img(src="./assets/wordcloud_fake_words5.png", \
                         style={"display" : "block", "margin": "auto", \
                             "max-width": "100%", "max-height" : "100%"})
                 ], style={"width": "40%"})
@@ -254,13 +254,13 @@ page2 = html.Div([
         dcc.Tab(html.Div([
                 html.Div([
                     html.H3('True Bigrams', style={"text-align" : "center"}),
-                    html.Img(src="./assets/wordcloud_true_bigrams.png", \
+                    html.Img(src="./assets/wordcloud_true_bigrams5.png", \
                         style={"display" : "block", "margin": "auto", \
                             "max-width": "100%", "max-height" : "100%"})
                 ], style={"width": "40%", "padding-right": "5vh"}),
                 html.Div([
                     html.H3('Fake Bigrams', style={"text-align" : "center"}),
-                    html.Img(src="./assets/wordcloud_fake_bigrams.png", \
+                    html.Img(src="./assets/wordcloud_fake_bigrams5.png", \
                         style={"display" : "block", "margin": "auto", \
                             "max-width": "100%", "max-height" : "100%"})
                 ], style={"width": "40%"})

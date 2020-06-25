@@ -5,8 +5,6 @@ from multiprocessing import Pool
 # External Libraries
 import pandas as pd
 # Components
-from nlp.sentiment import get_polarity_and_subjectivity_from_string, get_polarity_scores
-from nlp.translate import translate_to_en
 
 def load_dataframe_from_csv(path:str):
     df = pd.read_csv(path)
@@ -77,38 +75,6 @@ def load_data_as_dataframe() -> list:
             
     return [df_true, df_fake, df_true_meta, df_fake_meta]
  
-    
-def get_sentiment_dataframe(df_true, df_fake) -> list:
-    # Initialize Dataframes
-    df_true_sentiment = pd.DataFrame(columns=["TextBlob Polarity", "TextBlob Subjectivity",\
-        "VADER negative", "VADER neutral", "VADER positive", "VADER compound"])
-    df_fake_sentiment = pd.DataFrame(columns=["TextBlob Polarity", "TextBlob Subjectivity",\
-        "VADER negative", "VADER neutral", "VADER positive", "VADER compound"])
-
-    
-    # Get nlp data
-    for id, row in df_true.iterrows():
-        print(id)
-        translated_news = translate_to_en(row["News"])
-        print(translated_news)
-        polarity, subjectivity = get_polarity_and_subjectivity_from_string(translated_news)
-        vader = get_polarity_scores(translated_news)
-        df_true_sentiment.loc[id] = [polarity, subjectivity, vader["neg"], vader["neu"], vader["pos"], vader["compound"]]
-        
-
-    for id, row in df_fake.iterrows():
-        print(id)
-        translated_news = translate_to_en(row["News"])
-        print(translated_news)
-        polarity, subjectivity = get_polarity_and_subjectivity_from_string(translated_news)
-        vader = get_polarity_scores(translated_news)
-        df_fake_sentiment.loc[id] = [polarity, subjectivity, vader["neg"], vader["neu"], vader["pos"], vader["compound"]]
-    
-    # Sort index for Dataframes    
-    df_true_sentiment.sort_index()
-    df_fake_sentiment.sort_index()
-        
-    return [df_true_sentiment, df_fake_sentiment]
         
 def download_dataframe_as_csv(df, name:str, path:str="../data_csv/") -> None:
     df.to_csv(f"{path}/{name}.csv", index=True)

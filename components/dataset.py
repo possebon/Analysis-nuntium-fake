@@ -5,7 +5,12 @@ from multiprocessing import Pool
 # External Libraries
 import pandas as pd
 # Components
-from nlp import get_polarity_and_subjectivity_from_string, get_polarity_scores, translate_to_en
+from nlp.sentiment import get_polarity_and_subjectivity_from_string, get_polarity_scores
+from nlp.translate import translate_to_en
+
+def load_dataframe_from_csv(path:str):
+    df = pd.read_csv(path)
+    return df
 
 def load_data_as_dataframe() -> list:
     """Loads data from Dataset as Dataframe
@@ -15,16 +20,16 @@ def load_data_as_dataframe() -> list:
     """    
     
     # Initialize Dataframes
-    df_true = pd.DataFrame(columns=["Veracity", "News"])
-    df_fake = pd.DataFrame(columns=["Veracity", "News"])
-    df_true_meta = pd.DataFrame(columns=["Veracity", "Author", \
+    df_true = pd.DataFrame(columns=["ID", "Veracity", "News"])
+    df_fake = pd.DataFrame(columns=["ID", "Veracity", "News"])
+    df_true_meta = pd.DataFrame(columns=["ID", "Veracity", "Author", \
         "Link", "Category", "Date", "Tokens", "Words", "Types", \
         "Links Inside", "Words Uppercase", "Verbs", "Subjuntive\Imperative Verbs", \
         "Nouns", "Adjectives", "Adverbs", "Modal Verbs", "Singular\Second Personal Pronouns", \
         "Plural First Personal Pronouns", "Pronouns", "Pausality", "Characters", \
         "Average Sentence Length", "Average Word Length", "Percentage of Spelling Errors", \
         "Emotiveness", "Diversity"])
-    df_fake_meta = pd.DataFrame(columns=["Veracity", "Author", \
+    df_fake_meta = pd.DataFrame(columns=["ID", "Veracity", "Author", \
         "Link", "Category", "Date", "Tokens", "Words", "Types", \
         "Links Inside", "Words Uppercase", "Verbs", "Subjuntive\Imperative Verbs", \
         "Nouns", "Adjectives", "Adverbs", "Modal Verbs", "Singular\Second Personal Pronouns", \
@@ -48,16 +53,17 @@ def load_data_as_dataframe() -> list:
             else:
                 id = int(file.stem)
                 
-            print(id)
+            if id % 100 == 0 : print(id)
                 
             # Separate data for categories
             if veracity == "true":
-                df_true.loc[id] = [veracity, data]
+                df_true.loc[id] = [id, veracity, data]
             elif veracity == "fake":
-                df_fake.loc[id] = [veracity, data]
+                df_fake.loc[id] = [id, veracity, data]
             else:
                 data = data.split("\n")
                 data.insert(0, veracity)
+                data.insert(0, id)
                 if veracity == "true-meta-information":
                     df_true_meta.loc[id] = [*data]
                 elif veracity == "fake-meta-information":
@@ -104,16 +110,16 @@ def get_sentiment_dataframe(df_true, df_fake) -> list:
         
     return [df_true_sentiment, df_fake_sentiment]
         
-dft, dff, dftm, dffm = load_data_as_dataframe()
-
-dfts, dffs = get_sentiment_dataframe(dft, dff)
-
 def download_dataframe_as_csv(df, name:str, path:str="../data_csv/") -> None:
     df.to_csv(f"{path}/{name}.csv", index=True)
-    
-download_dataframe_as_csv(dft, "true")
-download_dataframe_as_csv(dff, "fake")
-download_dataframe_as_csv(dftm, "true-meta")
-download_dataframe_as_csv(dffm, "fake-meta")
-download_dataframe_as_csv(dfts, "true-sentiment")
-download_dataframe_as_csv(dffs, "fake-sentiment")
+
+def load_and_download_dataframes() -> None:
+    dft, dff, dftm, dffm = load_data_as_dataframe()
+    #dfts, dffs = get_sentiment_dataframe(dft, dff)
+
+    download_dataframe_as_csv(dft, "true")
+    download_dataframe_as_csv(dff, "fake")
+    download_dataframe_as_csv(dftm, "true-meta")
+    download_dataframe_as_csv(dffm, "fake-meta")
+    #download_dataframe_as_csv(dfts, "true-sentiment")
+    #download_dataframe_as_csv(dffs, "fake-sentiment")

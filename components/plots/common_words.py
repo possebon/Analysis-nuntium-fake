@@ -66,20 +66,20 @@ def display_chart_words(df_true, df_fake):
     df = pd.concat([df_true, df_fake])
     colors = ["blue" if veracity == "True" else "red" for veracity in df["Veracity"]]
     
-    fig = make_subplots(rows=1, cols=3, subplot_titles=["True", "True/Fake", "Fake"], shared_yaxes=True)
+    fig = make_subplots(rows=1, cols=3, subplot_titles=["True", "True/Fake", "Fake"], shared_xaxes=True)
 
     fig.add_trace(
-        go.Bar(x=df_true["Word"], y=df_true["Count"], name="True"),
+        go.Bar(x=df_true["Count"], y=df_true["Word"], name="True", orientation='h'),
         row=1, col=1
     )
 
     fig.add_trace(
-        go.Bar(x=df["Word"], y=df["Count"], marker=dict(color = colors)),
+        go.Bar(x=df["Count"], y=df["Word"], marker=dict(color = colors), orientation='h'),
         row=1, col=2
     )
 
     fig.add_trace(
-        go.Bar(x=df_fake["Word"], y=df_fake["Count"], name="Fake", marker=dict(color= "red")),
+        go.Bar(x=df_fake["Count"], y=df_fake["Word"], name="Fake", marker=dict(color= "red"), orientation='h'),
         row=1, col=3
     )
     fig.update_layout(margin=dict(l=20, r=20, t=20, b=20))

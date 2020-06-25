@@ -213,8 +213,8 @@ fig_common_bigrams = common_words.display_chart_bigrams(df_true, df_fake)
 #df_true, df_fake = common_words.get_dataframes()
 
 # Wordcloud
-common_words.display_wordcloud_words()
-common_words.display_wordcloud_bigrams()
+#common_words.display_wordcloud_words()
+#common_words.display_wordcloud_bigrams()
 
 page2 = html.Div([
     dcc.Tabs([

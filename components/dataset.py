@@ -81,11 +81,8 @@ def download_dataframe_as_csv(df, name:str, path:str="../data_csv/") -> None:
 
 def load_and_download_dataframes() -> None:
     dft, dff, dftm, dffm = load_data_as_dataframe()
-    #dfts, dffs = get_sentiment_dataframe(dft, dff)
 
     download_dataframe_as_csv(dft, "true")
     download_dataframe_as_csv(dff, "fake")
     download_dataframe_as_csv(dftm, "true-meta")
     download_dataframe_as_csv(dffm, "fake-meta")
-    #download_dataframe_as_csv(dfts, "true-sentiment")
-    #download_dataframe_as_csv(dffs, "fake-sentiment")

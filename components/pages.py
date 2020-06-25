@@ -51,9 +51,18 @@ page1_3d = meta.display_charts_3d_page_1(df_true, df_fake)
 page2_3d = meta.display_charts_3d_page_2(df_true, df_fake)
 
 home = html.Div([
-    html.H2("Felipe Boff Nunes"),
-    html.P("01/06/2020"),
-    html.P("A pre-analysis of linkedin profiles for creation of a marketing campaign.")
+    html.H2("Dados das Fake News Brasileiras"),
+    html.P("26/06/2020"),
+    html.H4("Fake.Br Corpus"),
+    html.P("Como ponto de partida vamos utilizar a base de dados do Fake.Br Corpus,"),
+    html.P("que foi a base criada pelo Núcleo Interinstitucional de Linguística Computacional"),
+    html.P(" (NILC) para treinar uma ferramenta de detecção automática de fake news em português."),
+    html.P(" Esta base é composta por 7.200 notícias (3.600 verdadeiras + 3.600 falsas)"),
+    html.P(" que foram coletadas nos mais diversos diários do Brasil."),
+    html.H4("Perguntas"),
+    html.P("Existe algum período onde o número de fake news são maiores?"),
+    html.P("Existe relação entre a escrita correta e as fake news?"),
+    html.P("Quais são os temas com mais fake news?")
 ], style={"margin": "2em"})
 
 page1 = html.Div([

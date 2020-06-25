@@ -93,20 +93,20 @@ def display_chart_bigrams(df_true, df_fake):
     df = pd.concat([df_true, df_fake])
     colors = ["blue" if veracity == "True" else "red" for veracity in df["Veracity"]]
     
-    fig = make_subplots(rows=1, cols=3, subplot_titles=["True", "True/Fake", "Fake"], shared_yaxes=True)
+    fig = make_subplots(rows=1, cols=3, subplot_titles=["True", "True/Fake", "Fake"], shared_xaxes=True)
 
     fig.add_trace(
-        go.Bar(x=df_true["Bigram"], y=df_true["Count"], name="True"),
+        go.Bar(x=df_true["Count"], y=df_true["Bigram"], name="True", orientation='h'),
         row=1, col=1
     )
 
     fig.add_trace(
-        go.Bar(x=df["Bigram"], y=df["Count"], marker=dict(color = colors)),
+        go.Bar(x=df["Count"], y=df["Bigram"], marker=dict(color = colors), orientation='h'),
         row=1, col=2
     )
 
     fig.add_trace(
-        go.Bar(x=df_fake["Bigram"], y=df_fake["Count"], name="Fake", marker=dict(color= "red")),
+        go.Bar(x=df_fake["Count"], y=df_fake["Bigram"], name="Fake", marker=dict(color= "red"), orientation='h'),
         row=1, col=3
     )
     fig.update_layout(margin=dict(l=20, r=20, t=20, b=20))
@@ -126,7 +126,7 @@ def display_wordcloud_words():
     df_fake = remove_common_stop_words(df_fake)
     
     wordcloud_image = "./assets/wordcloud_true_words2.png"
-    wordcloud_true = WordCloud(width=800, height=600,background_color="white")
+    wordcloud_true = WordCloud(width=800, height=600,background_color="white", colormap="Blues")
     words = {}
     for i, row in df_true.iterrows():
         words[row["Word"]] = row["Count"]
@@ -134,7 +134,7 @@ def display_wordcloud_words():
     wordcloud_true.to_file(wordcloud_image)
     
     wordcloud_image = "./assets/wordcloud_fake_words2.png"
-    wordcloud_fake = WordCloud(width=800, height=600,background_color="white")
+    wordcloud_fake = WordCloud(width=800, height=600,background_color="white", colormap="Reds")
     words = {}
     for i, row in df_fake.iterrows():
         words[row["Word"]] = row["Count"]
@@ -148,7 +148,7 @@ def display_wordcloud_bigrams():
     df_fake = remove_common_stop_words(df_fake)
     
     wordcloud_image = "./assets/wordcloud_true_bigrams.png"
-    wordcloud_true = WordCloud(width=800, height=600,background_color="white")
+    wordcloud_true = WordCloud(width=800, height=600,background_color="white", colormap="Blues")
     words = {}
     for i, row in df_true.iterrows():
         words[row["Bigram"]] = row["Count"]
@@ -156,12 +156,11 @@ def display_wordcloud_bigrams():
     wordcloud_true.to_file(wordcloud_image)
     
     wordcloud_image = "./assets/wordcloud_fake_bigrams.png"
-    wordcloud_fake = WordCloud(width=800, height=600,background_color="white")
+    wordcloud_fake = WordCloud(width=800, height=600,background_color="white", colormap="Reds")
     words = {}
     for i, row in df_fake.iterrows():
         words[row["Bigram"]] = row["Count"]
     wordcloud_fake = wordcloud_fake.generate_from_frequencies(words)
     wordcloud_fake.to_file(wordcloud_image)
-    
     
     

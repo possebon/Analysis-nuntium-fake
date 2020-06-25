@@ -32,7 +32,7 @@ sidebar = html.Div(
         html.H2("Fake News", className="display-5"),
         html.Hr(),
         html.P(
-            "An interface analysis of brazilian fake news.", className="lead", style={'fontSize' : '15px'}
+            "An interface for analysis of Brazilian fake news.", className="lead", style={'fontSize' : '15px'}
         ),
         dbc.Nav(
             [

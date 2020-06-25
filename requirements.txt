@@ -6,3 +6,4 @@ dash-core-components
 dash-bootstrap-components
 pandas
 plotly
+wordcloud

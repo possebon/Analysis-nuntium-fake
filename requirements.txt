@@ -8,3 +8,4 @@ pandas
 plotly
 wordcloud
 nltk
+spacy

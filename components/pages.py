@@ -323,11 +323,11 @@ page3 = html.Div([
         dcc.Tab(
             html.Div([
                 html.Div([
-                    html.H4('True', style={"text-align" : "center"}),
+                    html.H4('Week True', style={"text-align" : "center"}),
                     dcc.Graph(id="em", figure = day_week_true, config={ 'displayModeBar': False})
                 ], style={"width": "40%"}),
                 html.Div([
-                    html.H4('Fake', style={"text-align" : "center"}),
+                    html.H4('Week Fake', style={"text-align" : "center"}),
                     dcc.Graph(id="em", figure = day_week_fake, config={ 'displayModeBar': False})
                 ], style={"width": "40%"}),
             ], className="row", style={"padding":"5vh"}),

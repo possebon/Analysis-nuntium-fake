@@ -50,6 +50,12 @@ links = meta.display_charts_links(df_true, df_fake)
 page1_3d = meta.display_charts_3d_page_1(df_true, df_fake)
 page2_3d = meta.display_charts_3d_page_2(df_true, df_fake)
 
+# Page 9
+published_date = meta.display_chars_published_date_fake(df_true, df_fake)
+day_week_true = meta.display_charts_day_week_true(df_true, df_fake)
+day_week_fake = meta.display_charts_day_week_fake(df_true, df_fake)
+
+
 home = html.Div([
     html.H2("Dados das Fake News Brasileiras"),
     html.P("26/06/2020"),
@@ -191,19 +197,6 @@ page1 = html.Div([
                 ], style={"width": "30%"})
             ], className="row", style={"padding":"5vh"}),
         label="Others"),
-        # Page 8
-        dcc.Tab(
-            html.Div([
-                html.Div([
-                    html.H4('Avg Sentence(x) / Diversity(y) / Words(z)', style={"text-align" : "center"}),
-                    dcc.Graph(id="em", figure = page1_3d, config={ 'displayModeBar': False})
-                ], style={"width": "40%", "padding-right": "5vh", "padding-left": "5vh"}),
-                html.Div([
-                    html.H4('Characters(x) / Verbs(y) / Errors%(z)', style={"text-align" : "center"}),
-                    dcc.Graph(id="em", figure = page2_3d, config={ 'displayModeBar': False})
-                ], style={"width": "40%"}),
-            ], className="row", style={"padding":"5vh"}),
-        label="3D"),
     ])
 ])
 
@@ -216,7 +209,7 @@ fig_common_bigrams = common_words.display_chart_bigrams(df_true, df_fake)
 #common_words.display_wordcloud_words()
 #common_words.display_wordcloud_bigrams()
 
-page2 = html.Div([
+page4 = html.Div([
     dcc.Tabs([
         # Words
         dcc.Tab(html.Div([
@@ -269,6 +262,82 @@ page2 = html.Div([
     ])
 ])
 
+verbs_by_tokens = meta.display_charts_verbs_by_tokens(df_true, df_fake)
+pronouns_by_tokens = meta.display_charts_pronouns_by_tokens(df_true, df_fake)
+nouns_by_tokens = meta.display_charts_nouns_by_tokens(df_true, df_fake)
+
+page2 = html.Div([
+    dcc.Tabs([
+        # Page 0
+        dcc.Tab(
+            html.Div([
+                html.Div([
+                    html.H3('Verbs by Tokens', style={"text-align" : "center"}),
+                    dcc.Graph(id="dv", figure = verbs_by_tokens, config={ 'displayModeBar': False})
+                ])
+            ], style={"padding":"5vh", "width" : "50%", "margin" : "auto"}),
+        label="Verbs by Tokens"),
+        dcc.Tab(
+            html.Div([
+                html.Div([
+                    html.H3('Pronouns by Tokens', style={"text-align" : "center"}),
+                    dcc.Graph(id="dv", figure = pronouns_by_tokens, config={ 'displayModeBar': False})
+                ])
+            ], style={"padding":"5vh", "width" : "50%", "margin" : "auto"}),
+        label="Pronouns by Tokens"),
+        dcc.Tab(
+            html.Div([
+                html.Div([
+                    html.H3('Nouns by Tokens', style={"text-align" : "center"}),
+                    dcc.Graph(id="dv", figure = nouns_by_tokens, config={ 'displayModeBar': False})
+                ])
+            ], style={"padding":"5vh", "width" : "50%", "margin" : "auto"}),
+        label="Nouns by Tokens"),
+        # Page 8
+        dcc.Tab(
+            html.Div([
+                html.Div([
+                    html.H4('Avg Sentence(x) / Diversity(y) / Words(z)', style={"text-align" : "center"}),
+                    dcc.Graph(id="em", figure = page1_3d, config={ 'displayModeBar': False})
+                ], style={"width": "40%", "padding-right": "5vh", "padding-left": "5vh"}),
+                html.Div([
+                    html.H4('Characters(x) / Verbs(y) / Errors%(z)', style={"text-align" : "center"}),
+                    dcc.Graph(id="em", figure = page2_3d, config={ 'displayModeBar': False})
+                ], style={"width": "40%"}),
+            ], className="row", style={"padding":"5vh"}),
+        label="3D"),
+    ])
+])
+
+page3 = html.Div([
+    dcc.Tabs([
+        # Page 0
+       dcc.Tab(
+            html.Div([
+                html.Div([
+                    html.H4('Published dates', style={"text-align" : "center"}),
+                    dcc.Graph(id="em", figure = published_date, config={ 'displayModeBar': False})
+                ]),
+            ], style={"padding":"5vh"}),
+        label="Published Dates"),
+        dcc.Tab(
+            html.Div([
+                html.Div([
+                    html.H4('True', style={"text-align" : "center"}),
+                    dcc.Graph(id="em", figure = day_week_true, config={ 'displayModeBar': False})
+                ], style={"width": "40%"}),
+                html.Div([
+                    html.H4('Fake', style={"text-align" : "center"}),
+                    dcc.Graph(id="em", figure = day_week_fake, config={ 'displayModeBar': False})
+                ], style={"width": "40%"}),
+            ], className="row", style={"padding":"5vh"}),
+        label="Day of the week"),
+    ])
+])
+
+
 pages = {"home"  : home,
          "page1" : page1,
-         "page2" : page2}
+         "page2" : page2,
+         "page3" : page3,
+         "page4" : page4}

@@ -82,7 +82,7 @@ def display_chart_words(df_true, df_fake):
         go.Bar(x=df_fake["Count"], y=df_fake["Word"], name="Fake", marker=dict(color= "red"), orientation='h'),
         row=1, col=3
     )
-    fig.update_layout(margin=dict(l=20, r=20, t=20, b=20))
+    fig.update_layout(margin=dict(l=20, r=20, t=20, b=20), xaxis_title="Count", yaxis_title="Words")
     return fig
 
 def display_chart_bigrams(df_true, df_fake):

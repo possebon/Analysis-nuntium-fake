@@ -1,3 +1,4 @@
+import datetime
 # Setup path for parent directory
 import os, sys
 currentdir = os.path.dirname(os.path.realpath(__file__))
@@ -275,3 +276,70 @@ def display_charts_3d_page_2(df_true, df_fake):
     fig.update_traces(hovertemplate=None)
     fig.update_layout(margin=dict(l=20, r=20, t=20, b=20), showlegend=False, hovermode="x")
     return fig
+
+# Tab 2 - Page 1
+
+def display_chars_published_date_fake(df_true, df_fake):
+    
+    
+    #colors = ["red" if veracity == "fake-meta-information" else "blue" for veracity in df["Veracity"]]
+    
+    df = pd.concat([df_true, df_fake])
+    
+    fig = make_subplots(rows=1, cols=3, subplot_titles=["True", "True/Fake", "Fake"], shared_yaxes=True)
+    fig.add_trace(go.Histogram(x=df_true["Date"], name="True",\
+        marker=dict(color= "blue"), opacity=0.6), 1,1)
+    fig.add_trace(go.Histogram(x=df["Date"], name="All", \
+        marker=dict(color ="grey"), opacity=0.6), 1,2)
+    fig.add_trace(go.Histogram(x=df_fake["Date"], name="Fake", \
+        marker=dict(color= "red"), opacity=0.6), 1,3)
+    fig.update_layout(margin=dict(l=20, r=20, t=20, b=20), xaxis_title="Date", yaxis_title="Count")
+    return fig 
+
+def display_charts_day_week_true(df_true, df_fake):
+    
+    for i, row in df_true.iterrows():
+        date = row["Date"]
+        date = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+        df_true.loc[i, "Day"] = date.strftime("%A")
+    
+    fig = px.pie(df_true, names="Day")
+    return fig 
+
+def display_charts_day_week_fake(df_true, df_fake):
+    
+    for i, row in df_fake.iterrows():
+        date = row["Date"]
+        date = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+        df_fake.loc[i, "Day"] = date.strftime("%A")
+        
+    fig = px.pie(df_fake, names="Day")
+    return fig 
+
+
+def display_charts_verbs_by_tokens(df_true, df_fake):
+    fig = make_subplots(rows=1, cols=2, subplot_titles=["True", "Fake"], shared_xaxes=True)
+    fig.add_trace(go.Scatter(x=df_true["Tokens"], y=df_true["Verbs"], name="True",\
+        marker=dict(color= "blue"), mode="markers", opacity=0.6), 1,1)
+    fig.add_trace(go.Scatter(x=df_fake["Tokens"], y=df_fake["Verbs"], name="Fake", \
+        marker=dict(color= "red"), mode="markers", opacity=0.6), 1,2)
+    fig.update_layout(margin=dict(l=20, r=20, t=20, b=20), xaxis_title="Tokens", yaxis_title="Verbs")
+    return fig 
+
+def display_charts_pronouns_by_tokens(df_true, df_fake):
+    fig = make_subplots(rows=1, cols=2, subplot_titles=["True", "Fake"], shared_xaxes=True)
+    fig.add_trace(go.Scatter(x=df_true["Tokens"], y=df_true["Pronouns"], name="True",\
+        marker=dict(color= "blue"), mode="markers", opacity=0.6), 1,1)
+    fig.add_trace(go.Scatter(x=df_fake["Tokens"], y=df_fake["Pronouns"], name="Fake", \
+        marker=dict(color= "red"), mode="markers", opacity=0.6), 1,2)
+    fig.update_layout(margin=dict(l=20, r=20, t=20, b=20), xaxis_title="Tokens", yaxis_title="Verbs")
+    return fig 
+
+def display_charts_nouns_by_tokens(df_true, df_fake):
+    fig = make_subplots(rows=1, cols=2, subplot_titles=["True", "Fake"], shared_xaxes=True)
+    fig.add_trace(go.Scatter(x=df_true["Tokens"], y=df_true["Nouns"], name="True",\
+        marker=dict(color= "blue"), mode="markers", opacity=0.6), 1,1)
+    fig.add_trace(go.Scatter(x=df_fake["Tokens"], y=df_fake["Nouns"], name="Fake", \
+        marker=dict(color= "red"), mode="markers", opacity=0.6), 1,2)
+    fig.update_layout(margin=dict(l=20, r=20, t=20, b=20), xaxis_title="Tokens", yaxis_title="Verbs")
+    return fig 

@@ -312,14 +312,7 @@ page2 = html.Div([
 page3 = html.Div([
     dcc.Tabs([
         # Page 0
-       dcc.Tab(
-            html.Div([
-                html.Div([
-                    html.H4('Published dates', style={"text-align" : "center"}),
-                    dcc.Graph(id="em", figure = published_date, config={ 'displayModeBar': False})
-                ]),
-            ], style={"padding":"5vh"}),
-        label="Published Dates"),
+       
         dcc.Tab(
             html.Div([
                 html.Div([
@@ -332,6 +325,14 @@ page3 = html.Div([
                 ], style={"width": "40%"}),
             ], className="row", style={"padding":"5vh"}),
         label="Day of the week"),
+        dcc.Tab(
+            html.Div([
+                html.Div([
+                    html.H4('Published dates', style={"text-align" : "center"}),
+                    dcc.Graph(id="em", figure = published_date, config={ 'displayModeBar': False})
+                ]),
+            ], style={"padding":"5vh"}),
+        label="Published Dates"),
     ])
 ])
 

@@ -29,7 +29,7 @@ CONTENT_STYLE = {
 
 sidebar = html.Div(
     [
-        html.H2("Fake News", className="display-5"),
+        html.H2("FakeBrasil.help", className="display-5"),
         html.Hr(),
         html.P(
             "An interface for analysis of Brazilian fake news.", className="lead", style={'fontSize' : '15px'}

@@ -57,7 +57,7 @@ day_week_fake = meta.display_charts_day_week_fake(df_true, df_fake)
 
 
 home = html.Div([
-    html.H2("Dados das Fake News Brasileiras"),
+    html.H2("FakeBrasil.help"),
     html.P("26/06/2020"),
     html.H4("Fake.Br Corpus"),
     html.P("Como ponto de partida vamos utilizar a base de dados do Fake.Br Corpus,"),
